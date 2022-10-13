@@ -1,0 +1,20 @@
+{
+  "defaultEnv": { "ENV": "NODE_ENV" },
+
+  "dev": {
+    "driver": "pg",
+    "host": { "ENV": "POSTGRESHOST" },
+    "port": { "ENV": "POSTGRESPORT" },
+    "database": { "ENV": "POSTGRESDB" },
+    "user": { "ENV": "POSTGRESUSER" },
+    "password": "0000"
+  },
+  "test": {
+    "driver": "pg",
+    "host": { "ENV": "POSTGRESHOST" },
+    "port": { "ENV": "POSTGRESPORT" },
+    "database": { "ENV": "POSTGRESDB_TEST" },
+    "user": { "ENV": "POSTGRESUSER" },
+    "password": { "ENV": "POSTGRESPASSWORD" }
+  }
+}
