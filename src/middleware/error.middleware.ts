@@ -11,6 +11,7 @@ const errorMiddleware = (
   res.status(status).json({
     message,
   });
+  next();
 };
 
 export default errorMiddleware;

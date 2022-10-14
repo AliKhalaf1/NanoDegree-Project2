@@ -7,10 +7,10 @@ routes
   .route('/')
   .post(controllers.create)
   .get(validateToken, controllers.getAllUsers)
-  .patch(controllers.updateUser);
+  .patch(validateToken, controllers.updateUser);
 routes
   .route('/:id')
-  .get(controllers.getUserById)
-  .delete(controllers.deleteUser);
+  .get(validateToken, controllers.getUserById)
+  .delete(validateToken, controllers.deleteUser);
 routes.route('/authenticate').post(controllers.authenticate);
 export default routes;

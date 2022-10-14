@@ -1,6 +1,5 @@
 import User from '../types/user.model';
 import db from '../database';
-import { Connection } from 'pg';
 import config from '../config';
 import bcrypt from 'bcrypt';
 const hashpass = (password: string) => {
@@ -38,14 +37,18 @@ class UserModel {
     }
   }
 
-  async getUserById(id: String): Promise<User> {
+  async getUserById(id: string): Promise<User> {
     try {
       const connect = await db.connect();
       const sql =
         'SELECT id,email,firstname,lastname FROM users WHERE id =($1);';
       const result = await connect.query(sql, [id]);
       connect.release();
-      return result.rows[0];
+      if (result.rows.length) {
+        return result.rows[0];
+      } else {
+        throw new Error(` user not found`);
+      }
     } catch (err) {
       throw new Error(`Unable to return user:${(err as Error).message}`);
     }
@@ -70,7 +73,7 @@ class UserModel {
     }
   }
 
-  async deleteUser(id: String): Promise<User> {
+  async deleteUser(id: string): Promise<User> {
     try {
       const connect = await db.connect();
       const sql =

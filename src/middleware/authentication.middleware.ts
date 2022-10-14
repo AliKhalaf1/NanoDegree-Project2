@@ -1,12 +1,11 @@
-import express, { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 import Error from '../interface/error.interface';
 import config from '../config';
 
 const handleAuthenticationError = (next: NextFunction) => {
-  const error: Error = new Error('Login Error');
+  const error: Error = new Error('Authentication Failed');
   error.status = 401;
-  console.log('a');
   next(error);
 };
 const validateToken = (req: Request, res: Response, next: NextFunction) => {
